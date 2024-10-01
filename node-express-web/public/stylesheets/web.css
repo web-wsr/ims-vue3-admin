@@ -1,0 +1,135 @@
+/* layout */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #F0F5F5;
+}
+
+.page-header {
+    width: 100%;
+    height: 50px;
+    position: relative;
+    padding-left: 30px;
+    top: 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+
+    background-color: #61AD3D;
+}
+
+.page-header ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    right: 5px;
+}
+
+.page-header ul .nav-box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    height: 10px;
+    border-radius: 2px;
+    transition: .5s;
+}
+
+.page-header ul li {
+    width: 200px;
+}
+
+.page-header ul li a {
+    color: #E1FAEB;
+    font: 100 15px "优设黑体";
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 50px;
+}
+
+.nav-item.active {
+    font-size: 170%;
+    font-weight: 700;
+    /* background-color: #afb0b4; */
+}
+
+
+.page-content {
+    flex: 1;
+    height: 100%;
+    margin: 30px;
+    overflow: auto;
+    background-color: #fff;
+}
+
+/* content */
+.all-list {
+    width: 100%;
+    height: 100%;
+}
+
+.all-item {
+    display: flex;
+    width: 100%;
+    height: 15%;
+    align-items: center;
+    border-bottom: 1px solid #F4F1F5;
+}
+
+.item-index {
+    width: 10%;
+    text-align: center;
+    color: #FF6D30;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.item-content {
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.item-title {
+    color: #7EBB5E;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.item-time {
+    color: #B9B9BB;
+    font-weight: 400;
+}
+
+/* detail */
+.article-wrapper {
+    flex: 1;
+    margin: 30px auto;
+    width: 800px;
+    height: 100%;
+    overflow: auto;
+    background-color: #fff;
+}
+
+.article-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+
+.article-title {
+    font-size: 20px;
+    color: #333;
+    font-weight: 600;
+}
+
+.article-time {
+    font-size: 14px;
+    color: #C6C8CA;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
