@@ -22,4 +22,9 @@ export default {
   user: `${ADMIN_PREFIX}/user`,
   // 文章相关的路由
   article: `${ADMIN_PREFIX}/article`,
+
+  // 获取七牛服务器的token
+  uploadToken: `${PREFIX}/api//qiniu-uploadToken`,
+  // 上传文件到七牛服务器
+  uploadImage: 'http://upload-z2.qiniup.com'
 };

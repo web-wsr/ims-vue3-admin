@@ -49,8 +49,7 @@ async function performSearch(){
             (!articleParams.value.state || item.state.includes(articleParams.value.state))
         )
     })
-    console.log('articleList', articleList.value);
-    
+    console.log('articleList', articleList.value);    
     totalItems.value = articleList.value.length
     
 }

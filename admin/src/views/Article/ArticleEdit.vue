@@ -1,10 +1,40 @@
 <script setup>
 import { ref } from 'vue';
 import { useRoute,useRouter} from 'vue-router';
+import ImageUploader from 'quill-image-uploader';
+import 'quill-image-uploader/dist/quill.imageUploader.min.css';
+import QiuniuService  from '@/models/qiniu';
 import ContainerLayout from '@/components/Layout/ContainerLayout.vue';
 import ChannelSelect from '@/components/Article/channelSelect.vue';
 import ArticleService from '@/models/article';
 import { ElMessage } from 'element-plus';
+
+
+// 富本编辑器图片上传
+const modules = ref({
+        name: 'imageUploader',
+        module: ImageUploader,
+        options:{
+            upload:async (file) =>{
+            try{
+                const {domain, token} = await QiuniuService.uploadToken();
+                const formData = new FormData();
+                formData.append('file',file);
+                formData.append('token',token);
+                const res = await QiuniuService.uploadImage(formData);
+                let image_url = domain + '/' + res.hash;
+                console.log(image_url);
+                
+                return image_url;
+            }catch(error){
+                console.error('Error:', error)
+                throw new Error('Upload failed')
+            }
+            
+        }
+        }
+})
+defineExpose({modules:modules})
 
 const route = useRoute();
 const router = useRouter();
@@ -65,7 +95,7 @@ async function handelPublish(state) {
         </el-form-item>
         <el-form-item label="文章内容" prop="content">
             <div class="editor">
-                <QuillEditor theme="snow" v-model:content="editFromModel.content" content-type="html" />
+                <QuillEditor theme="snow" toolbar="full"  :modules="modules" v-model:content="editFromModel.content" content-type="html" />
             </div>
         </el-form-item>
         <el-form-item>
@@ -86,3 +116,5 @@ async function handelPublish(state) {
 
 
 </style>
+
+

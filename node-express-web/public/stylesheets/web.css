@@ -106,9 +106,15 @@
 
 /* detail */
 .article-wrapper {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
     margin: 30px auto;
-    width: 800px;
+    width: 100%;
+    max-width: 1400px;
+    min-width: 800px;
+    padding: 20px;
+    /* 内边距 */
+    box-sizing: border-box;
     height: 100%;
     overflow: auto;
     background-color: #fff;
@@ -132,4 +138,26 @@
     color: #C6C8CA;
     margin-top: 5px;
     margin-bottom: 10px;
+}
+
+/* 媒体查询 */
+@media (min-width: 768px) {
+    .article-wrapper {
+        width: 90%;
+        /* 在中等屏幕及以上时，宽度为 90% */
+    }
+}
+
+@media (min-width: 1024px) {
+    .article-wrapper {
+        width: 80%;
+        /* 在大屏幕及以上时，宽度为 80% */
+    }
+}
+
+@media (min-width: 1200px) {
+    .article-wrapper {
+        width: 70%;
+        /* 在特大屏幕及以上时，宽度为 70% */
+    }
 }

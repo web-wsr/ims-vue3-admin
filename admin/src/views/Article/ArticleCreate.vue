@@ -1,12 +1,40 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter} from 'vue-router';
+import { ElMessage } from 'element-plus';
+import ImageUploader from 'quill-image-uploader';
+import 'quill-image-uploader/dist/quill.imageUploader.min.css';
 import ContainerLayout from '@/components/Layout/ContainerLayout.vue';
 import ChannelSelect from '@/components/Article/channelSelect.vue';
 import ArticleService from '@/models/article';
-import { ElMessage } from 'element-plus';
-import { useArticleStore } from '@/stores/index'
+import QiuniuService  from '@/models/qiniu';
+import { useArticleStore } from '@/stores/index';
 // import ClassifyService from '@/models/classify';
+// 富本编辑器图片上传
+const modules = ref({
+        name: 'imageUploader',
+        module: ImageUploader,
+        options:{
+            upload:async (file) =>{
+            try{
+                const {domain, token} = await QiuniuService.uploadToken();
+                const formData = new FormData();
+                formData.append('file',file);
+                formData.append('token',token);
+                const res = await QiuniuService.uploadImage(formData);
+                let image_url = domain + '/' + res.hash;
+                console.log(image_url);
+                
+                return image_url;
+            }catch(error){
+                console.error('Error:', error)
+                throw new Error('Upload failed')
+            }
+            
+        }
+        }
+})
+defineExpose({modules:modules})
 
 const articleStore = useArticleStore();
 const router = useRouter();
@@ -40,6 +68,9 @@ async function handleEditPublish(state) {
     articleStore.setArticleCreated(); // 不带参数
     router.push({name:'Article'})
 }
+
+
+
 </script>
 
 <template>
@@ -59,7 +90,7 @@ async function handleEditPublish(state) {
         </el-form-item>
         <el-form-item label="文章内容" prop="content">
             <div class="editor">
-                <QuillEditor theme="snow" v-model:content="createFormModel.content" content-type="html" />
+                <QuillEditor theme="snow" toolbar="full" :modules="modules" v-model:content="createFormModel.content" content-type="html" />
             </div>
         </el-form-item>
         <el-form-item>

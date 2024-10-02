@@ -34,4 +34,8 @@ router.put('/article/:id', articleController.articleEdit);
 // 删除文章
 router.delete('/article/:id', articleController.articleDelete);
 
+
+
+
+
 module.exports = router;

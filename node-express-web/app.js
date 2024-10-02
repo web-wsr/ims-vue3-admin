@@ -12,6 +12,7 @@ var nunjucks = require('nunjucks');
 
 var adminRouter = require('./routes/admin/adminRouter');
 var webRouter = require('./routes/web/webRouter');
+var apiRouter = require('./routes/apiRouter')
 // 引用filter
 var filters = require('./filters/index')
 
@@ -44,6 +45,9 @@ app.use('/api/admin', adminRouter)
 
 // 企业官网路由 /api/web
 app.use('/api/web', webRouter)
+
+// api 路由
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
